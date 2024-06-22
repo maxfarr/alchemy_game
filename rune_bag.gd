@@ -11,7 +11,10 @@ func initDefaultBag():
 				RemainingRunes.append(Rune.new(shape, element))
 
 func drawRune():
-	return RemainingRunes.pop_at(range(RemainingRunes.size()).pick_random())
+	if RemainingRunes.size() == 0: return null
+	
+	var index = range(RemainingRunes.size()).pick_random()
+	return RemainingRunes.pop_at(index)
 	
 func _init():
 	initDefaultBag()

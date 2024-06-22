@@ -6,6 +6,7 @@ extends Button
 func _ready():
 	pass # Replace with function body.
 
-func _button_pressed():
+func _on_pressed():
 	var rune = bag.drawRune()
-	print(Utils.RuneShape.keys()[rune.shape] + " " + Utils.Element.keys()[rune.element])
+	
+	print("Bag is empty!" if rune == null else rune.shape + " / " + rune.element)
