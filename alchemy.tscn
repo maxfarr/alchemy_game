@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr34cyujqcbfn"]
+
+[ext_resource type="Script" path="res://drawButton.gd" id="1_ecvk6"]
+[ext_resource type="Script" path="res://rune_bag.gd" id="1_x11dt"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 392.0
+offset_top = 244.0
+offset_right = 733.0
+offset_bottom = 403.0
+text = "DO IT"
+script = ExtResource("1_ecvk6")
+
+[node name="RuneBag" type="Node" parent="."]
+script = ExtResource("1_x11dt")
