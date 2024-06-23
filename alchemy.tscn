@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr34cyujqcbfn"]
+[gd_scene load_steps=9 format=3 uid="uid://cr34cyujqcbfn"]
 
 [ext_resource type="Script" path="res://drawButton.gd" id="1_ecvk6"]
 [ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="3_3cafq"]
 [ext_resource type="Script" path="res://hand_slot.gd" id="3_d7d07"]
 [ext_resource type="Script" path="res://hand_slots_container.gd" id="3_gabwj"]
+[ext_resource type="Texture2D" uid="uid://db1weccruubxa" path="res://sprites/play_button_temp.png" id="5_s5k13"]
+[ext_resource type="Script" path="res://play_spell_button.gd" id="6_0t52t"]
+[ext_resource type="AudioStream" uid="uid://cplnp75s08ueq" path="res://sfx/SFX_UI_ClickSpecial1.wav" id="7_vlmb1"]
+[ext_resource type="AudioStream" uid="uid://cslkxapxngww2" path="res://sfx/SFX_UI_Draw_1.1.wav" id="8_5abf1"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Button" type="Button" parent="."]
+visible = false
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 117.0
@@ -93,6 +98,7 @@ stretch_mode = 2
 script = ExtResource("3_d7d07")
 
 [node name="HandSlot" type="TextureRect" parent="."]
+unique_name_in_owner = true
 offset_left = 259.0
 offset_top = 74.0
 offset_right = 299.0
@@ -102,6 +108,7 @@ stretch_mode = 2
 script = ExtResource("3_d7d07")
 
 [node name="HandSlot2" type="TextureRect" parent="."]
+unique_name_in_owner = true
 offset_left = 352.0
 offset_top = 149.0
 offset_right = 392.0
@@ -111,6 +118,7 @@ stretch_mode = 2
 script = ExtResource("3_d7d07")
 
 [node name="HandSlot3" type="TextureRect" parent="."]
+unique_name_in_owner = true
 offset_left = 321.0
 offset_top = 264.0
 offset_right = 361.0
@@ -120,6 +128,7 @@ stretch_mode = 2
 script = ExtResource("3_d7d07")
 
 [node name="HandSlot4" type="TextureRect" parent="."]
+unique_name_in_owner = true
 offset_left = 195.0
 offset_top = 266.0
 offset_right = 235.0
@@ -129,6 +138,7 @@ stretch_mode = 2
 script = ExtResource("3_d7d07")
 
 [node name="HandSlot5" type="TextureRect" parent="."]
+unique_name_in_owner = true
 offset_left = 157.0
 offset_top = 156.0
 offset_right = 197.0
@@ -143,4 +153,22 @@ points = PackedVector2Array(275, 91, 212, 285, 370, 167, 176, 171, 341, 286)
 closed = true
 default_color = Color(0.707127, 0.575502, 7.70092e-07, 1)
 
+[node name="PlaySpellButton" type="TextureButton" parent="."]
+offset_left = 7.0
+offset_top = 317.0
+offset_right = 186.0
+offset_bottom = 393.0
+texture_normal = ExtResource("5_s5k13")
+stretch_mode = 0
+script = ExtResource("6_0t52t")
+
+[node name="RuneDropSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_vlmb1")
+
+[node name="RuneDrawSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_5abf1")
+
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="PlaySpellButton" to="PlaySpellButton" method="_on_pressed"]

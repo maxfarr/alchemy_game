@@ -5,13 +5,14 @@ class_name HandSlot
 @export var rune : Rune
 
 func _get_drag_data(at_position):
-	var sprite = RuneSprite.new(rune)
-	sprite.set_indexed("self_modulate:a", 0.5)
-	set_drag_preview(sprite)
-	return {
-		"rune": rune,
-		"origin": self
-	}
+	if rune != null:
+		var sprite = RuneSprite.new(rune)
+		sprite.set_indexed("self_modulate:a", 0.5)
+		set_drag_preview(sprite)
+		return {
+			"rune": rune,
+			"origin": self
+		}
 	
 func _can_drop_data(at_position, data):
 	return true
@@ -39,6 +40,8 @@ func _drop_data(at_position, data):
 		var rune_sprite = RuneSprite.new(outgoing_rune)
 		rune_sprite.position = Vector2(Utils.RUNE_WIDTH_PX/2, Utils.RUNE_WIDTH_PX/2)
 		origin.add_child(rune_sprite)
+		
+	%RuneDropSFX.play()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

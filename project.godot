@@ -23,5 +23,6 @@ PlayerData="*res://player_data.gd"
 
 window/size/viewport_width=600
 window/size/viewport_height=400
+window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
