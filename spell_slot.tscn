@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bow1jxh2us0n5"]
+
+[ext_resource type="Script" path="res://spell_slot.gd" id="1_28yta"]
+[ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="1_f828x"]
+
+[node name="SpellSlot" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_f828x")
+script = ExtResource("1_28yta")

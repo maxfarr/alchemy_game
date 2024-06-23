@@ -1,19 +1,146 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr34cyujqcbfn"]
+[gd_scene load_steps=5 format=3 uid="uid://cr34cyujqcbfn"]
 
 [ext_resource type="Script" path="res://drawButton.gd" id="1_ecvk6"]
-[ext_resource type="Script" path="res://rune_bag.gd" id="1_x11dt"]
+[ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="3_3cafq"]
+[ext_resource type="Script" path="res://hand_slot.gd" id="3_d7d07"]
+[ext_resource type="Script" path="res://hand_slots_container.gd" id="3_gabwj"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Button" type="Button" parent="."]
-offset_left = 392.0
-offset_top = 244.0
-offset_right = 733.0
-offset_bottom = 403.0
-text = "DO IT"
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 117.0
+offset_bottom = 43.0
+text = "draw hand"
 script = ExtResource("1_ecvk6")
 
-[node name="RuneBag" type="Node" parent="."]
-script = ExtResource("1_x11dt")
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 522.0
+offset_top = 34.0
+offset_right = 579.0
+offset_bottom = 363.0
+script = ExtResource("3_gabwj")
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer2"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer3"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="CenterContainer4" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer4"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="CenterContainer5" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer5"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="CenterContainer6" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer6"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="CenterContainer7" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HandSlot" type="TextureRect" parent="VBoxContainer/CenterContainer7"]
+layout_mode = 2
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="HandSlot" type="TextureRect" parent="."]
+offset_left = 259.0
+offset_top = 74.0
+offset_right = 299.0
+offset_bottom = 114.0
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="HandSlot2" type="TextureRect" parent="."]
+offset_left = 352.0
+offset_top = 149.0
+offset_right = 392.0
+offset_bottom = 189.0
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="HandSlot3" type="TextureRect" parent="."]
+offset_left = 321.0
+offset_top = 264.0
+offset_right = 361.0
+offset_bottom = 304.0
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="HandSlot4" type="TextureRect" parent="."]
+offset_left = 195.0
+offset_top = 266.0
+offset_right = 235.0
+offset_bottom = 306.0
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="HandSlot5" type="TextureRect" parent="."]
+offset_left = 157.0
+offset_top = 156.0
+offset_right = 197.0
+offset_bottom = 196.0
+texture = ExtResource("3_3cafq")
+stretch_mode = 2
+script = ExtResource("3_d7d07")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(275, 91, 212, 285, 370, 167, 176, 171, 341, 286)
+closed = true
+default_color = Color(0.707127, 0.575502, 7.70092e-07, 1)
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
