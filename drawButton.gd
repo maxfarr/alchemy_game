@@ -5,8 +5,8 @@ func _ready():
 	pass # Replace with function body.
 
 func _on_pressed():
-	for i in range(7):
-		var rune = PlayerData.drawRune()
+	for i in range(Utils.HAND_SLOTS):
+		var rune = %GameController.drawRune()
 		
 		if rune == null:
 			print("Bag is empty!")

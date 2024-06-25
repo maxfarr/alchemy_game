@@ -355,7 +355,6 @@ theme_override_fonts/font = ExtResource("12_k57bw")
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 
-[connection signal="gui_input" from="black_fadein" to="black_fadein" method="_on_gui_input"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="PlaySpellButton" to="PlaySpellButton" method="_on_pressed"]
 [connection signal="pressed" from="PlaySpellButton" to="GameController" method="_on_play_spell_button_pressed"]

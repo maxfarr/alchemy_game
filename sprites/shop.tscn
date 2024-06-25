@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8iycrk6q3a83"]
+
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="1_b4anj"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 303.0
+offset_top = 9.0
+offset_right = 445.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("1_b4anj")
+text = "Dream Shop"
