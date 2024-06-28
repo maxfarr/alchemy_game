@@ -3,6 +3,7 @@ extends Node
 class_name GameController
 
 @onready var remaining_runes = PlayerData.rune_bag
+static var game_running = true
 
 @onready var play_slots = [
 	%HandSlot,
@@ -30,6 +31,7 @@ var score_to_beat : int = 500
 var reward : int = 10
 var plays : int = 3
 var transformations : int = 5
+var essence_indicator
 
 func reset(stb, r, p, t):
 	remaining_runes = PlayerData.rune_bag
@@ -41,6 +43,11 @@ func reset(stb, r, p, t):
 	plays = p
 	transformations = t
 	%target_label.text = str(score_to_beat)
+	%casts_remaining_label.text = str(plays)
+	# this is so lazy lol, need to figure out how to do this better
+	%black_fadein.visible = true
+	game_running = true
+	essence_indicator = null
 
 func display_combo(indices, combo):
 	await get_tree().create_timer(0.5).timeout
@@ -281,13 +288,64 @@ func draw_new_runes():
 		slot.add_child(rune_sprite)
 		rune_sprite.position = Vector2(16, 16)
 
+func create_extra_essence_indicator(number, reason):
+	var indicator = load("res://sprites/extra_essence_indicator.tscn").instantiate()
+	indicator.text = "+" + str(number) + " (" + reason + ")"
+	indicator.set_position(Vector2(185, 82))
+	print("adding to tree")
+	%round_win_screen.add_child(indicator)
+	var earned = int(%essence_earned_label.text)
+	earned += number
+	PlayerData.essence += number
+	%essence_earned_label.text = str(earned)
+	%EssenceIndicator.get_label().text = str(PlayerData.essence)
+	await get_tree().create_timer(1.0).timeout
+
+func update_earned_essence():
+	PlayerData.essence += reward
+	%EssenceIndicator.get_label().text = str(PlayerData.essence)
+	for i in range(plays):
+		await get_tree().create_timer(0.5).timeout
+		print("creating new")
+		await create_extra_essence_indicator(1, "Unused Cast")
+
+func win():
+	get_tree().change_scene_to_file("res://sprites/upgrade_screen.tscn")
+	
+func lose():
+	%essence_earned_label.text = str(reward)
+	var tween = create_tween()
+	tween.tween_property(%round_win_screen, "position:y", 110, 1.5).set_ease(Tween.EASE_IN)
+	tween.tween_callback(update_earned_essence)
+
 func _on_play_spell_button_pressed():
+	if not game_running: return
 	if not spell_exists(): return
 	await score_hand()
+	
+	plays -= 1
+	%casts_remaining_label.text = str(plays)
+	
 	for i in range(5):
 		var slot = play_slots[i]
 		if slot.rune != null:
 			slot.get_child(0).queue_free()
 			slot.rune = null
-	#if 
+			
+	if total_score >= score_to_beat:
+		game_running = false
+		var tween = create_tween()
+		tween.tween_property(%black_fadein, "self_modulate:a", 1.0, 1.0).set_ease(Tween.EASE_IN)
+		tween.tween_callback(win)
+		return
+	
+	if plays == 0:
+		game_running = false
+		var tween = create_tween()
+		tween.tween_property(%black_fadein, "self_modulate:a", 1.0, 1.0).set_ease(Tween.EASE_IN)
+		tween.tween_callback(lose)
+		return
+	
 	draw_new_runes()
+
+

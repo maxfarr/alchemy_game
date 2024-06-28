@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://caqb2t2ml6khc"]
+
+[ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="1_tpni8"]
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="2_ode8t"]
+[ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="3_7845c"]
+
+[node name="UpgradeTooltip" type="TextureRect"]
+z_index = 1
+offset_right = 183.0
+offset_bottom = 76.0
+texture = ExtResource("1_tpni8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -21.0
+offset_right = 83.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ode8t")
+theme_override_font_sizes/font_size = 8
+text = "Lightning Catalyst"
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_7845c")
+theme_override_font_sizes/font_size = 5
+text = "+1 Mult to Lightning combos"

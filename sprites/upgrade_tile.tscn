@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwsgjvmj53fdk"]
+
+[ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="1_4sm81"]
+[ext_resource type="Script" path="res://sprites/upgrade_tile.gd" id="1_nkxx5"]
+
+[node name="UpgradeTile" type="Container"]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("1_nkxx5")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4sm81")
+theme_override_font_sizes/font_size = 10
+text = "Fg"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

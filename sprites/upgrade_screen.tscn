@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://bunuukpo5c2h0"]
+
+[ext_resource type="Script" path="res://sprites/upgrade_screen.gd" id="1_2h7ex"]
+[ext_resource type="SpriteFrames" uid="uid://dcenyptmkxlew" path="res://sprites/bg.tres" id="1_2q1qy"]
+[ext_resource type="Texture2D" uid="uid://dhrtkp7higewa" path="res://sprites/black_background.png" id="1_o3ima"]
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="1_upu5x"]
+[ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="2_b2j0r"]
+[ext_resource type="Script" path="res://sprites/fadein_bg.gd" id="2_tqx68"]
+[ext_resource type="Script" path="res://sprites/smokebg.gd" id="2_us7ra"]
+[ext_resource type="Texture2D" uid="uid://dlmbctkc1gdn5" path="res://sprites/slot_background_64.png" id="8_is7tv"]
+[ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="9_dbd4h"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2h7ex")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+z_index = 2
+offset_right = 768.0
+offset_bottom = 432.0
+texture = ExtResource("1_o3ima")
+script = ExtResource("2_tqx68")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+offset_left = 209.0
+offset_top = 37.0
+offset_right = 554.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("1_upu5x")
+theme_override_font_sizes/font_size = 24
+text = "Alchemy complete!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+z_index = 1
+offset_left = 260.0
+offset_top = 98.0
+offset_right = 509.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("2_b2j0r")
+theme_override_font_sizes/font_size = 15
+text = "Choose 2 rewards:"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("1_2q1qy")
+frame = 483
+frame_progress = 1.0
+centered = false
+script = ExtResource("2_us7ra")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_left = 149.0
+offset_top = 161.0
+offset_right = 213.0
+offset_bottom = 283.0
+
+[node name="UpgradeSlot" type="TextureRect" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("8_is7tv")
+
+[node name="UpgradeLabel" type="Label" parent="CenterContainer/UpgradeSlot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+offset_left = 247.0
+offset_top = 161.0
+offset_right = 311.0
+offset_bottom = 283.0
+
+[node name="UpgradeSlot2" type="TextureRect" parent="CenterContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("8_is7tv")
+
+[node name="UpgradeLabel2" type="Label" parent="CenterContainer2/UpgradeSlot2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -98.0
+offset_right = -58.0
+offset_bottom = 23.0
+
+[node name="CenterContainer3" type="CenterContainer" parent="."]
+offset_left = 345.0
+offset_top = 161.0
+offset_right = 409.0
+offset_bottom = 283.0
+
+[node name="UpgradeSlot3" type="TextureRect" parent="CenterContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("8_is7tv")
+
+[node name="UpgradeLabel3" type="Label" parent="CenterContainer3/UpgradeSlot3"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -196.0
+offset_right = -156.0
+offset_bottom = 23.0
+
+[node name="CenterContainer4" type="CenterContainer" parent="."]
+offset_left = 443.0
+offset_top = 161.0
+offset_right = 507.0
+offset_bottom = 283.0
+
+[node name="UpgradeSlot4" type="TextureRect" parent="CenterContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("8_is7tv")
+
+[node name="UpgradeLabel4" type="Label" parent="CenterContainer4/UpgradeSlot4"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -294.0
+offset_right = -254.0
+offset_bottom = 23.0
+
+[node name="CenterContainer5" type="CenterContainer" parent="."]
+offset_left = 541.0
+offset_top = 161.0
+offset_right = 605.0
+offset_bottom = 283.0
+
+[node name="UpgradeSlot5" type="TextureRect" parent="CenterContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("8_is7tv")
+
+[node name="UpgradeLabel5" type="Label" parent="CenterContainer5/UpgradeSlot5"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -392.0
+offset_right = -352.0
+offset_bottom = 23.0
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 284.0
+offset_top = 305.0
+offset_right = 471.0
+offset_bottom = 356.0
+texture = ExtResource("9_dbd4h")
+
+[node name="CenterContainer" type="CenterContainer" parent="TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TextureRect2/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_upu5x")
+text = "Continue"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]

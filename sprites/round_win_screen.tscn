@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://ci0ou7tdrtgu4"]
+
+[ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="1_wgnw1"]
+[ext_resource type="Script" path="res://round_win_screen.gd" id="2_q4mvp"]
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="3_ytyjb"]
+[ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="4_mcwco"]
+[ext_resource type="Texture2D" uid="uid://b5k6pvw8wpcs5" path="res://sprites/button_blank.png" id="5_pa0qq"]
+
+[node name="background" type="TextureRect"]
+z_index = 2
+offset_right = 298.0
+offset_bottom = 227.0
+texture = ExtResource("1_wgnw1")
+script = ExtResource("2_q4mvp")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 298.0
+offset_bottom = 227.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ytyjb")
+text = "Alchemy Complete!"
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="essence_earned_label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ytyjb")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="Essence earned" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_mcwco")
+theme_override_font_sizes/font_size = 10
+text = "Essence earned"
+horizontal_alignment = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("5_pa0qq")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer/CenterContainer3/TextureButton"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 48.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer3/TextureButton/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ytyjb")
+theme_override_font_sizes/font_size = 16
+text = "Shop"
+horizontal_alignment = 1

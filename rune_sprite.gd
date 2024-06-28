@@ -14,7 +14,12 @@ func _ready():
 	add_child(base_sprite)
 	base_sprite.texture = sheet.get_frame_texture("runes", Utils.base_sprite_indices[rune.element][rune.shape])
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_mouse_entered():
+	pass # Replace with function body.
+
+func _on_mouse_exited():
+	pass # Replace with function body.

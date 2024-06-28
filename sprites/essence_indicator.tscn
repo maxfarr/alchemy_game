@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://f7x8vdrerl4p"]
+
+[ext_resource type="Script" path="res://sprites/essence_indicator.gd" id="1_4de56"]
+[ext_resource type="Texture2D" uid="uid://bh1tp6md2mpu6" path="res://glowstone lol.png" id="1_ka80s"]
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="2_cxo6h"]
+
+[node name="EssenceIndicator" type="Node2D"]
+script = ExtResource("1_4de56")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 74.0
+offset_bottom = 43.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ka80s")
+stretch_mode = 2
+
+[node name="essence_label" type="Label" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.737255, 0.368627, 1)
+theme_override_fonts/font = ExtResource("2_cxo6h")
+text = "0"

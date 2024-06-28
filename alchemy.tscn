@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cr34cyujqcbfn"]
+[gd_scene load_steps=18 format=3 uid="uid://cr34cyujqcbfn"]
 
 [ext_resource type="Script" path="res://drawButton.gd" id="1_ecvk6"]
 [ext_resource type="Script" path="res://alchemy.gd" id="1_l5uup"]
+[ext_resource type="PackedScene" uid="uid://f7x8vdrerl4p" path="res://sprites/essence_indicator.tscn" id="2_451b1"]
 [ext_resource type="Texture2D" uid="uid://dhrtkp7higewa" path="res://sprites/black_background.png" id="2_u8q3v"]
 [ext_resource type="Texture2D" uid="uid://jvdmnyffm4w2" path="res://sprites/slot_background.png" id="3_3cafq"]
 [ext_resource type="Script" path="res://hand_slot.gd" id="3_d7d07"]
@@ -15,16 +16,22 @@
 [ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="11_xhs1f"]
 [ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="12_k57bw"]
 [ext_resource type="Script" path="res://game_controller.gd" id="13_p6sg2"]
+[ext_resource type="Texture2D" uid="uid://b5k6pvw8wpcs5" path="res://sprites/button_blank.png" id="17_ylej7"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_l5uup")
 
+[node name="EssenceIndicator" parent="." instance=ExtResource("2_451b1")]
+unique_name_in_owner = true
+visible = false
+z_index = 2
+
 [node name="black_fadein" type="TextureRect" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 1
 offset_right = 768.0
 offset_bottom = 432.0
-mouse_filter = 0
 texture = ExtResource("2_u8q3v")
 
 [node name="Button" type="Button" parent="."]
@@ -172,9 +179,9 @@ closed = true
 default_color = Color(0.707127, 0.575502, 7.70092e-07, 1)
 
 [node name="PlaySpellButton" type="TextureButton" parent="."]
-offset_left = 337.0
+offset_left = 338.0
 offset_top = 387.0
-offset_right = 410.0
+offset_right = 411.0
 offset_bottom = 419.0
 texture_normal = ExtResource("3_3cafq")
 stretch_mode = 0
@@ -257,9 +264,9 @@ explosiveness = 1.0
 [node name="ComboPlayed" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = 248.0
-offset_top = 339.0
+offset_top = 326.0
 offset_right = 506.0
-offset_bottom = 362.0
+offset_bottom = 356.0
 theme_override_fonts/font = ExtResource("12_k57bw")
 theme_override_font_sizes/font_size = 15
 horizontal_alignment = 1
@@ -354,6 +361,107 @@ theme_override_colors/font_color = Color(0.772549, 0.568627, 0.105882, 1)
 theme_override_fonts/font = ExtResource("12_k57bw")
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 334.0
+offset_top = 366.0
+offset_right = 414.0
+offset_bottom = 389.0
+
+[node name="casts remaining" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_k57bw")
+theme_override_font_sizes/font_size = 5
+text = "casts remaining:"
+
+[node name="casts_remaining_label" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_k57bw")
+theme_override_font_sizes/font_size = 5
+text = "0"
+
+[node name="round_win_screen" type="TextureRect" parent="."]
+unique_name_in_owner = true
+z_index = 2
+offset_left = 231.0
+offset_top = 468.0
+offset_right = 525.0
+offset_bottom = 693.0
+texture = ExtResource("3_3cafq")
+
+[node name="CenterContainer" type="CenterContainer" parent="round_win_screen"]
+layout_mode = 0
+offset_right = 298.0
+offset_bottom = 227.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="round_win_screen/CenterContainer"]
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="round_win_screen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_xhs1f")
+text = "Alchemy Complete!"
+
+[node name="CenterContainer" type="CenterContainer" parent="round_win_screen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="essence_earned_label" type="Label" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_xhs1f")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+
+[node name="Essence earned" type="Label" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_k57bw")
+theme_override_font_sizes/font_size = 10
+text = "Essence earned"
+horizontal_alignment = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="round_win_screen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="shop_button" type="TextureButton" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("17_ylej7")
+
+[node name="CenterContainer" type="CenterContainer" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer3/shop_button"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 48.0
+
+[node name="Label" type="Label" parent="round_win_screen/CenterContainer/VBoxContainer/CenterContainer3/shop_button/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_xhs1f")
+theme_override_font_sizes/font_size = 16
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="Upgrades" type="HFlowContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 10.0
+offset_top = 26.0
+offset_right = 120.0
+offset_bottom = 226.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 88.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("11_xhs1f")
+theme_override_font_sizes/font_size = 8
+text = "Upgrades"
 
 [connection signal="gui_input" from="black_fadein" to="black_fadein" method="_on_gui_input"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

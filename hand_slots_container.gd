@@ -2,16 +2,6 @@ extends VBoxContainer
 
 class_name HandSlotsContainer
 
-@onready var hand_slots = [
-	$"../VBoxContainer/CenterContainer/HandSlot",
-	$"../VBoxContainer/CenterContainer2/HandSlot",
-	$"../VBoxContainer/CenterContainer3/HandSlot",
-	$"../VBoxContainer/CenterContainer4/HandSlot",
-	$"../VBoxContainer/CenterContainer5/HandSlot",
-	$"../VBoxContainer/CenterContainer6/HandSlot",
-	$"../VBoxContainer/CenterContainer7/HandSlot"
-]
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await get_tree().create_timer(1.0).timeout

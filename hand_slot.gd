@@ -5,7 +5,7 @@ class_name HandSlot
 @export var rune : Rune
 
 func _get_drag_data(at_position):
-	if rune != null:
+	if rune != null and GameController.game_running:
 		var sprite = RuneSprite.new(rune)
 		sprite.set_indexed("self_modulate:a", 0.5)
 		set_drag_preview(sprite)
