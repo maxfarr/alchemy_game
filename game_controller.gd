@@ -4,6 +4,7 @@ class_name GameController
 
 @onready var remaining_runes = PlayerData.rune_bag
 static var game_running = true
+static var first_spell_played = false
 
 @onready var play_slots = [
 	%HandSlot,
@@ -28,35 +29,66 @@ var current_score : int = 0
 var current_mult : int = 0
 var total_score : int = 0
 var score_to_beat : int = 500
-var reward : int = 10
 var plays : int = 3
-var transformations : int = 5
+var discards : int = 3
 var essence_indicator
 
-func reset(stb, r, p, t):
+func reset(stb):
 	remaining_runes = PlayerData.rune_bag
 	current_score = 0
 	current_mult = 0
 	total_score = 0
 	score_to_beat = stb
-	reward = r
-	plays = p
-	transformations = t
+	plays = 3 + PlayerData.upgrades["pair_of_gloves"]
+	discards = 3 + PlayerData.upgrades["vanishing_dust"]
 	%target_label.text = str(score_to_beat)
 	%casts_remaining_label.text = str(plays)
 	# this is so lazy lol, need to figure out how to do this better
 	%black_fadein.visible = true
 	game_running = true
 	essence_indicator = null
+	first_spell_played = false
 
 func display_combo(indices, combo):
+	var combo_name = combo[0]
 	await get_tree().create_timer(0.5).timeout
 	for i in indices:
 		slot_particles[i].restart()
-	%ComboPlayed.text = Utils.combo_names[combo]
+	%ComboPlayed.text = Utils.combo_names[combo_name]
 	%ComboPlayed.visible = true
-	current_score += PlayerData.combo_scores[combo][0]
-	current_mult += PlayerData.combo_scores[combo][1]
+	current_score += PlayerData.combo_scores[combo_name][0]
+	current_mult += PlayerData.combo_scores[combo_name][1]
+	# check for upgrades
+	for element in Utils.element_names:
+		print("checking element ", element)
+		var catalyst_name = element + "_catalyst"
+		print(catalyst_name)
+		print(combo[1])
+		if element.to_upper() in combo[1]:
+			current_mult += PlayerData.upgrades[catalyst_name]
+			
+	for element in Utils.element_names:
+		print("checking element ", element)
+		var gem_name = element + "_gem"
+		print(gem_name)
+		print(combo[1])
+		print(Utils.element_opposites[element])
+		if element.to_upper() in combo[1]:
+			print("present")
+			current_mult += PlayerData.upgrades[gem_name] * 2
+		if Utils.element_opposites[element].to_upper() in combo[1]:
+			print("opposite present")
+			current_mult -= PlayerData.upgrades[gem_name]
+			
+	if combo_name == "shape_triad":
+		current_mult += PlayerData.upgrades["triad_booster"] * 2
+		
+	if not first_spell_played:
+		current_mult += PlayerData.upgrades["running_shoes"] * 2
+		
+	if indices.size() <= 3:
+		current_mult += PlayerData.upgrades["minimalism"] * 2
+		
 	%charge_label.text = str(current_score)
 	%mult_label.text = str(current_mult)
 	%current_spell_score_label.text = "+" + str(int(current_score * current_mult))
@@ -212,7 +244,7 @@ func score_hand():
 		if play_slots[i].rune.shape != play_slots[neighbors[i][0]].rune.shape \
 		and play_slots[neighbors[i][0]].rune.shape != play_slots[neighbors[i][1]].rune.shape \
 		and play_slots[neighbors[i][1]].rune.shape != play_slots[i].rune.shape:
-			combo_occurrences["shape_triad"].append([[i, neighbors[i][0], neighbors[i][1]]])
+			combo_occurrences["shape_triad"].append([[i, neighbors[i][0], neighbors[i][1]], []])
 	
 	print(runes_checked_for_elements)
 	print(runes_checked_for_shapes)
@@ -224,20 +256,20 @@ func score_hand():
 	if combo_occurrences["triple_element"].size() == 1 and combo_occurrences["double_element"].size() == 1:
 		var runes_in_infusion = combo_occurrences["triple_element"][0][0]
 		runes_in_infusion.append_array(combo_occurrences["double_element"][0][0])
+		await display_combo(runes_in_infusion, ["unstable_infusion", [combo_occurrences["triple_element"][0][1], combo_occurrences["double_element"][0][1]]])
 		combo_occurrences["triple_element"] = []
 		combo_occurrences["double_element"] = []
-		await display_combo(runes_in_infusion, "unstable_infusion")
 		
 	if combo_occurrences["shape_harmony"].size() == 1 and combo_occurrences["elemental_harmony"].size() == 1:
+		await display_combo([0, 1, 2, 3, 4], ["total_harmony", [combo_occurrences["elemental_harmony"][0][1]]])
 		combo_occurrences["shape_harmony"] = []
 		combo_occurrences["elemental_harmony"] = []
-		await display_combo([0, 1, 2, 3, 4], "total_harmony")
 		
 	if combo_occurrences["double_element"].size() == 2:
 		var runes_in_infusion = combo_occurrences["double_element"][0][0]
 		runes_in_infusion.append_array(combo_occurrences["double_element"][1][0])
+		await display_combo(runes_in_infusion, ["stable_infusion", [combo_occurrences["double_element"][0][1], combo_occurrences["double_element"][1][1]]])
 		combo_occurrences["double_element"] = []
-		await display_combo(runes_in_infusion, "stable_infusion")
 		
 	for combo in combo_occurrences.keys():
 		#print(combo)
@@ -247,7 +279,7 @@ func score_hand():
 		
 		for i in range(combo_occurrences[combo].size()):
 			#print("calling display for combo %s" % combo)
-			await display_combo(combo_occurrences[combo][i][0], combo)
+			await display_combo(combo_occurrences[combo][i][0], [combo, [combo_occurrences[combo][i][1]]])
 	
 	total_score += current_score * current_mult
 	%score_label.text = str(total_score)
@@ -301,22 +333,12 @@ func create_extra_essence_indicator(number, reason):
 	%EssenceIndicator.get_label().text = str(PlayerData.essence)
 	await get_tree().create_timer(1.0).timeout
 
-func update_earned_essence():
-	PlayerData.essence += reward
-	%EssenceIndicator.get_label().text = str(PlayerData.essence)
-	for i in range(plays):
-		await get_tree().create_timer(0.5).timeout
-		print("creating new")
-		await create_extra_essence_indicator(1, "Unused Cast")
-
 func win():
 	get_tree().change_scene_to_file("res://sprites/upgrade_screen.tscn")
 	
 func lose():
-	%essence_earned_label.text = str(reward)
 	var tween = create_tween()
 	tween.tween_property(%round_win_screen, "position:y", 110, 1.5).set_ease(Tween.EASE_IN)
-	tween.tween_callback(update_earned_essence)
 
 func _on_play_spell_button_pressed():
 	if not game_running: return
@@ -325,6 +347,7 @@ func _on_play_spell_button_pressed():
 	
 	plays -= 1
 	%casts_remaining_label.text = str(plays)
+	first_spell_played = true
 	
 	for i in range(5):
 		var slot = play_slots[i]

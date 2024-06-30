@@ -3,7 +3,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	%GameController.reset(500, 10, 3, 5)
+	%GameController.reset(Utils.levels[PlayerData.level]["score_to_beat"])
 	%black_fadein.self_modulate.a = 0.0
 	for upgrade in PlayerData.upgrades:
 		for i in range(PlayerData.upgrades[upgrade]):

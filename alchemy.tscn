@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cr34cyujqcbfn"]
+[gd_scene load_steps=19 format=3 uid="uid://cr34cyujqcbfn"]
 
 [ext_resource type="Script" path="res://drawButton.gd" id="1_ecvk6"]
 [ext_resource type="Script" path="res://alchemy.gd" id="1_l5uup"]
@@ -9,14 +9,15 @@
 [ext_resource type="Script" path="res://hand_slots_container.gd" id="3_gabwj"]
 [ext_resource type="Texture2D" uid="uid://1mk3mbkivg4l" path="res://sprites/RuneSlot_Temp_1.3_noborder.png" id="5_2f35t"]
 [ext_resource type="Script" path="res://play_spell_button.gd" id="6_0t52t"]
-[ext_resource type="AudioStream" uid="uid://cplnp75s08ueq" path="res://sfx/SFX_UI_ClickSpecial1.wav" id="7_vlmb1"]
-[ext_resource type="AudioStream" uid="uid://cslkxapxngww2" path="res://sfx/SFX_UI_Draw_1.1.wav" id="8_5abf1"]
 [ext_resource type="Material" uid="uid://bj7krda7gsj1m" path="res://materials/sparkle_particle.tres" id="9_ub60t"]
 [ext_resource type="Texture2D" uid="uid://cofsuk72lfwlk" path="res://sprites/sparkle.png" id="10_gpwms"]
+[ext_resource type="AudioStream" uid="uid://dq0filw4bspxd" path="res://sfx/UI_Alchemy_PlaceTile_1.1.wav" id="11_08lno"]
 [ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="11_xhs1f"]
 [ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="12_k57bw"]
+[ext_resource type="AudioStream" uid="uid://dpyqrhf1og6bl" path="res://sfx/UI_Alchemy_DrawTiles_1.1.wav" id="12_vu5tb"]
 [ext_resource type="Script" path="res://game_controller.gd" id="13_p6sg2"]
 [ext_resource type="Texture2D" uid="uid://b5k6pvw8wpcs5" path="res://sprites/button_blank.png" id="17_ylej7"]
+[ext_resource type="AudioStream" uid="uid://dtxiwcnyghr3g" path="res://music/Alchemy Game_MainMusic_Idea1.3_loop.mp3" id="18_7mmld"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_l5uup")
@@ -200,11 +201,11 @@ horizontal_alignment = 1
 
 [node name="RuneDropSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_vlmb1")
+stream = ExtResource("11_08lno")
 
 [node name="RuneDrawSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("8_5abf1")
+stream = ExtResource("12_vu5tb")
 
 [node name="SpellSlotParticles" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -462,6 +463,10 @@ offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("11_xhs1f")
 theme_override_font_sizes/font_size = 8
 text = "Upgrades"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_7mmld")
+autoplay = true
 
 [connection signal="gui_input" from="black_fadein" to="black_fadein" method="_on_gui_input"]
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

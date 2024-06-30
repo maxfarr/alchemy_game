@@ -6,7 +6,7 @@
 
 [node name="UpgradeTooltip" type="TextureRect"]
 z_index = 1
-offset_right = 183.0
+offset_right = 182.0
 offset_bottom = 76.0
 texture = ExtResource("1_tpni8")
 

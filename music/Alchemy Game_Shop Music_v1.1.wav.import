@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxfcgcdp5ndyn"
+path="res://.godot/imported/Alchemy Game_Shop Music_v1.1.wav-7fad577c814608aefaa5425261221bfb.sample"
+
+[deps]
+
+source_file="res://music/Alchemy Game_Shop Music_v1.1.wav"
+dest_files=["res://.godot/imported/Alchemy Game_Shop Music_v1.1.wav-7fad577c814608aefaa5425261221bfb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

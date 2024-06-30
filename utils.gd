@@ -8,6 +8,23 @@ const HAND_SLOTS = 7
 enum RuneShape {CIRCLE, SQUARE, TRIANGLE}
 enum Element {FIRE, WATER, EARTH, AIR, LIGHTNING, METAL}
 
+const levels = [
+	{"score_to_beat" : 600,
+	"description" : "Can you turn my old teapot into a silver necklace?\nMy husband's birthday is coming up."},
+	{"score_to_beat" : 900,
+	"description" : "Hey, my sweet tooth is going wild today - could you\nturn this pork chop into a bar of chocolate?"},
+	{"score_to_beat" : 1500,
+	"description" : "Could you turn my chair into a table? I have a\nchair but I want a table instead. Table please."},
+	{"score_to_beat" : 3000,
+	"description" : "Hello. I would like this water to become poison.\nNo, no, it's for educational purposes."},
+	{"score_to_beat" : 7000,
+	"description" : "Listen... I wanna turn my dog into a dragon.\nIs that... cool?"},
+]
+
+const element_names = [
+	"fire", "water", "earth", "air", "lightning", "metal"
+]
+
 const upgrade_abbreviations = {
 	# element catalysts
 	# gain extra +1 mult for combos with given element
@@ -79,7 +96,7 @@ const upgrade_descriptions = {
 	"metal_catalyst" : "+1 Mult to Metal combos",
 	# triad booster
 	# same but for shape triads
-	"triad_booster" : "+1 Mult to Shape Triads",
+	"triad_booster" : "+2 Mult to Shape Triads",
 	# gems
 	# gain extra +2 mult for combos with given element, -1 to combos with opposite element
 	"fire_gem" : "+2 Mult to Fire combos,\n-1 Mult to Water combos",
@@ -184,10 +201,10 @@ const base_sprite_indices = {
 }
 
 const element_opposites = {
-	"FIRE" : "WATER",
-	"WATER" : "FIRE",
-	"EARTH" : "AIR",
-	"AIR" : "EARTH",
-	"LIGHTNING" : "METAL",
-	"METAL" : "LIGHTNING"
+	"fire" : "water",
+	"water" : "fire",
+	"earth" : "air",
+	"air" : "earth",
+	"lightning" : "metal",
+	"metal" : "lightning"
 }

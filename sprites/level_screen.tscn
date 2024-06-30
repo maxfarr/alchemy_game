@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn74gpebmhm27"]
+
+[ext_resource type="Script" path="res://sprites/level_screen.gd" id="1_4lmbp"]
+[ext_resource type="Texture2D" uid="uid://dhrtkp7higewa" path="res://sprites/black_background.png" id="1_evqrd"]
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="3_dp2si"]
+[ext_resource type="Texture2D" uid="uid://bfp07hkfsaaso" path="res://sprites/button_up.png" id="3_ghsjs"]
+[ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="4_04r4u"]
+[ext_resource type="Texture2D" uid="uid://dqkmu1tquhwlg" path="res://sprites/button_down.png" id="4_vanch"]
+[ext_resource type="Script" path="res://sprites/start_alchemy_button.gd" id="7_xoh13"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_4lmbp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_evqrd")
+
+[node name="info_panel" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 122.0
+offset_top = 459.0
+offset_right = 642.0
+offset_bottom = 694.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="info_panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="info_panel"]
+layout_mode = 2
+offset_left = 26.0
+offset_top = 34.0
+offset_right = 496.0
+offset_bottom = 147.0
+
+[node name="level_label" type="Label" parent="info_panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_dp2si")
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="level_description_label" type="Label" parent="info_panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_04r4u")
+theme_override_font_sizes/font_size = 10
+text = "\"Can you turn my old teapot into a silver necklace?
+My husband's birthday is coming up.\""
+horizontal_alignment = 1
+
+[node name="score_to_beat_label" type="Label" parent="info_panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_04r4u")
+theme_override_font_sizes/font_size = 15
+text = "Score to beat: 600"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="info_panel"]
+layout_mode = 2
+offset_left = 206.0
+offset_top = 145.0
+offset_right = 302.0
+offset_bottom = 241.0
+texture_normal = ExtResource("3_ghsjs")
+texture_pressed = ExtResource("4_vanch")
+stretch_mode = 0
+script = ExtResource("7_xoh13")
+
+[node name="Label" type="Label" parent="info_panel/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -18.0
+offset_right = 28.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_dp2si")
+theme_override_font_sizes/font_size = 16
+text = "Play"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="info_panel/TextureButton" to="info_panel/TextureButton" method="_on_pressed"]

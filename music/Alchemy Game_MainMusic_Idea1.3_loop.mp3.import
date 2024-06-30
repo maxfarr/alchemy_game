@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtxiwcnyghr3g"
+path="res://.godot/imported/Alchemy Game_MainMusic_Idea1.3_loop.mp3-a74f17ac9c034bfc7f04d810376d0b4b.mp3str"
+
+[deps]
+
+source_file="res://music/Alchemy Game_MainMusic_Idea1.3_loop.mp3"
+dest_files=["res://.godot/imported/Alchemy Game_MainMusic_Idea1.3_loop.mp3-a74f17ac9c034bfc7f04d810376d0b4b.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
