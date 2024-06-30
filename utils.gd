@@ -17,7 +17,7 @@ const levels = [
 	"description" : "Could you turn my chair into a table? I have a\nchair but I want a table instead. Table please."},
 	{"score_to_beat" : 3000,
 	"description" : "Hello. I would like this water to become poison.\nNo, no, it's for educational purposes."},
-	{"score_to_beat" : 7000,
+	{"score_to_beat" : 6000,
 	"description" : "Listen... I wanna turn my dog into a dragon.\nIs that... cool?"},
 ]
 
@@ -96,7 +96,7 @@ const upgrade_descriptions = {
 	"metal_catalyst" : "+1 Mult to Metal combos",
 	# triad booster
 	# same but for shape triads
-	"triad_booster" : "+2 Mult to Shape Triads",
+	"triad_booster" : "+1 Mult to Shape Triads",
 	# gems
 	# gain extra +2 mult for combos with given element, -1 to combos with opposite element
 	"fire_gem" : "+2 Mult to Fire combos,\n-1 Mult to Water combos",

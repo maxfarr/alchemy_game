@@ -2,7 +2,7 @@ extends Node
 
 class_name GameController
 
-@onready var remaining_runes = PlayerData.rune_bag
+@onready var remaining_runes = PlayerData.rune_bag.duplicate()
 static var game_running = true
 static var first_spell_played = false
 
@@ -12,6 +12,15 @@ static var first_spell_played = false
 	%HandSlot3,
 	%HandSlot4,
 	%HandSlot5
+]
+
+@onready var discard_slots = [
+	%DiscardSlot,
+	%DiscardSlot2
+]
+
+@onready var hand_slots = [
+	%BagSlot, %BagSlot2, %BagSlot3, %BagSlot4, %BagSlot5, %BagSlot6, %BagSlot7
 ]
 
 @onready var slot_particles = [
@@ -43,6 +52,7 @@ func reset(stb):
 	discards = 3 + PlayerData.upgrades["vanishing_dust"]
 	%target_label.text = str(score_to_beat)
 	%casts_remaining_label.text = str(plays)
+	%discards_remaining_label.text = "discards remaining: " + str(discards)
 	# this is so lazy lol, need to figure out how to do this better
 	%black_fadein.visible = true
 	game_running = true
@@ -81,13 +91,7 @@ func display_combo(indices, combo):
 			current_mult -= PlayerData.upgrades[gem_name]
 			
 	if combo_name == "shape_triad":
-		current_mult += PlayerData.upgrades["triad_booster"] * 2
-		
-	if not first_spell_played:
-		current_mult += PlayerData.upgrades["running_shoes"] * 2
-		
-	if indices.size() <= 3:
-		current_mult += PlayerData.upgrades["minimalism"] * 2
+		current_mult += PlayerData.upgrades["triad_booster"]
 		
 	%charge_label.text = str(current_score)
 	%mult_label.text = str(current_mult)
@@ -96,7 +100,7 @@ func display_combo(indices, combo):
 	%ComboPlayed.visible = false
 
 func _ready():
-	pass
+	print(game_running)
 
 func score_hand():
 	current_score = 0
@@ -281,6 +285,17 @@ func score_hand():
 			#print("calling display for combo %s" % combo)
 			await display_combo(combo_occurrences[combo][i][0], [combo, [combo_occurrences[combo][i][1]]])
 	
+	if not first_spell_played:
+		current_mult += PlayerData.upgrades["running_shoes"] * 2
+	
+	var number_of_runes_in_spell = 0
+	for i in range(5):
+		if play_slots[i].rune != null:
+			number_of_runes_in_spell += 1
+		
+	if number_of_runes_in_spell <= 3:
+		current_mult += PlayerData.upgrades["minimalism"] * 2
+	
 	total_score += current_score * current_mult
 	%score_label.text = str(total_score)
 	%current_spell_score_label.visible = false
@@ -334,11 +349,14 @@ func create_extra_essence_indicator(number, reason):
 	await get_tree().create_timer(1.0).timeout
 
 func win():
-	get_tree().change_scene_to_file("res://sprites/upgrade_screen.tscn")
+	if PlayerData.level == 4:
+		get_tree().change_scene_to_file("res://sprites/final_win_screen.tscn")
+	else:
+		get_tree().change_scene_to_file("res://sprites/upgrade_screen.tscn")
 	
 func lose():
 	var tween = create_tween()
-	tween.tween_property(%round_win_screen, "position:y", 110, 1.5).set_ease(Tween.EASE_IN)
+	tween.tween_property(%round_win_screen, "position:y", 110, 1.0).set_ease(Tween.EASE_IN)
 
 func _on_play_spell_button_pressed():
 	if not game_running: return
@@ -357,6 +375,8 @@ func _on_play_spell_button_pressed():
 			
 	if total_score >= score_to_beat:
 		game_running = false
+		var audio_tween = create_tween()
+		audio_tween.tween_property(%BackgroundMusic, "volume_db", -40.0, 2.0)
 		var tween = create_tween()
 		tween.tween_property(%black_fadein, "self_modulate:a", 1.0, 1.0).set_ease(Tween.EASE_IN)
 		tween.tween_callback(win)
@@ -371,4 +391,24 @@ func _on_play_spell_button_pressed():
 	
 	draw_new_runes()
 
-
+func _on_discard_button_pressed():
+	if discards == 0: return
+	if not game_running: return
+	for i in range(2):
+		if discard_slots[i].rune == null:
+			continue
+		for hand_slot in range(7):
+			if hand_slots[hand_slot].rune == null:
+				var rune = drawRune()
+				if rune == null: break
+				hand_slots[hand_slot].rune = rune
+				var rune_sprite = RuneSprite.new(rune)
+				print("adding child")
+				hand_slots[hand_slot].add_child(rune_sprite)
+				rune_sprite.position = Vector2(16, 16)
+				break
+		discard_slots[i].rune = null
+		discard_slots[i].get_child(0).queue_free()
+	discards -= 1
+	%discards_remaining_label.text = "discards remaining: " + str(discards)
+	%DiscardSFX.play()

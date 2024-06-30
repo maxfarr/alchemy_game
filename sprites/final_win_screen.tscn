@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://btbtyg7xr7bwn"]
+
+[ext_resource type="Texture2D" uid="uid://dhrtkp7higewa" path="res://sprites/black_background.png" id="1_u6mko"]
+[ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="2_vnaro"]
+[ext_resource type="FontFile" uid="uid://j7536pmgm8r6" path="res://Micro_Chat.ttf" id="3_cphi4"]
+[ext_resource type="AudioStream" uid="uid://bxfcgcdp5ndyn" path="res://music/Alchemy Game_Shop Music_v1.1.wav" id="4_y40kt"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_u6mko")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 279.0
+offset_top = 93.0
+offset_right = 475.0
+offset_bottom = 157.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_vnaro")
+theme_override_font_sizes/font_size = 32
+text = "You win!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 182.0
+offset_top = 181.0
+offset_right = 574.0
+offset_bottom = 339.0
+theme_override_fonts/font = ExtResource("3_cphi4")
+theme_override_font_sizes/font_size = 10
+text = "... and everyone else is dead.
+You turned a dog into a dragon, remember?
+What, did you think it was going to
+roll over? Play fetch, maybe?
+No, it burned the village to a crisp.
+Obviously.
+Come on."
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y40kt")
+autoplay = true

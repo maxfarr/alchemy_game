@@ -1,25 +1,75 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvkcxckqj82yi"]
+[gd_scene load_steps=11 format=3 uid="uid://cvkcxckqj82yi"]
 
+[ext_resource type="Script" path="res://main_menu.gd" id="1_42p35"]
 [ext_resource type="Texture2D" uid="uid://bfp07hkfsaaso" path="res://sprites/button_up.png" id="1_j58yb"]
 [ext_resource type="Texture2D" uid="uid://dqkmu1tquhwlg" path="res://sprites/button_down.png" id="2_md5oe"]
 [ext_resource type="Script" path="res://play_button.gd" id="3_7klsy"]
 [ext_resource type="FontFile" uid="uid://4mc2kldju6k3" path="res://Willow_Branch.ttf" id="4_vksc4"]
 [ext_resource type="Texture2D" uid="uid://dhrtkp7higewa" path="res://sprites/black_background.png" id="5_nuqeo"]
 [ext_resource type="AudioStream" uid="uid://bxfcgcdp5ndyn" path="res://music/Alchemy Game_Shop Music_v1.1.wav" id="6_ig0jw"]
+[ext_resource type="Texture2D" uid="uid://dmfpiphxb5ggt" path="res://sprites/Alchemist_FullScene_Empty.png" id="7_i31br"]
+[ext_resource type="SpriteFrames" uid="uid://pcdlus44e8j3" path="res://sprites/stand.tres" id="8_2ci2w"]
+[ext_resource type="Texture2D" uid="uid://dlwjgincr2s3m" path="res://sprites/wizard.png" id="9_ejesq"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_42p35")
 
-[node name="TextureButton" type="TextureButton" parent="."]
-offset_left = 117.0
-offset_top = 112.0
-offset_right = 245.0
-offset_bottom = 240.0
+[node name="bg_fadein" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 6
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_nuqeo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ig0jw")
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+offset_top = -163.0
+offset_right = 768.0
+offset_bottom = 504.0
+texture = ExtResource("7_i31br")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="stand_sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(165, 343)
+scale = Vector2(1.4, 1.4)
+sprite_frames = ExtResource("8_2ci2w")
+frame = 1
+frame_progress = 0.500617
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = -1
+offset_left = 140.0
+offset_top = 329.0
+offset_right = 300.0
+offset_bottom = 519.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_ejesq")
+
+[node name="play_button" type="TextureButton" parent="."]
+unique_name_in_owner = true
+offset_left = 337.0
+offset_top = 290.0
+offset_right = 465.0
+offset_bottom = 418.0
 texture_normal = ExtResource("1_j58yb")
 texture_pressed = ExtResource("2_md5oe")
 stretch_mode = 0
 script = ExtResource("3_7klsy")
 
-[node name="Label" type="Label" parent="TextureButton"]
+[node name="Label" type="Label" parent="play_button"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -37,16 +87,17 @@ theme_override_font_sizes/font_size = 24
 text = "Play"
 horizontal_alignment = 1
 
-[node name="TextureButton2" type="TextureButton" parent="."]
-offset_left = 268.46
-offset_top = 112.0
-offset_right = 396.46
-offset_bottom = 240.0
+[node name="how_button" type="TextureButton" parent="."]
+unique_name_in_owner = true
+offset_left = 488.46
+offset_top = 290.0
+offset_right = 616.46
+offset_bottom = 418.0
 texture_normal = ExtResource("1_j58yb")
 texture_pressed = ExtResource("2_md5oe")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="TextureButton2"]
+[node name="Label" type="Label" parent="how_button"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,15 +115,4 @@ theme_override_font_sizes/font_size = 24
 text = "How?"
 horizontal_alignment = 1
 
-[node name="bg_fadein" type="TextureRect" parent="."]
-unique_name_in_owner = true
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("5_nuqeo")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_ig0jw")
-autoplay = true
-
-[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="play_button" to="play_button" method="_on_pressed"]

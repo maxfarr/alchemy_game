@@ -53,12 +53,14 @@ var upgrades = {
 }
 
 func initDefaultBag():
+	var bag = []
 	for shape in Utils.RuneShape:
 		for element in Utils.Element:
 			for i in range(3):
-				rune_bag.append(Rune.new(shape, element))
+				bag.append(Rune.new(shape, element))
+	return bag
 	
 func _init():
-	initDefaultBag()
+	rune_bag = initDefaultBag()
 	upgrades_remaining = 0
 	level = 0

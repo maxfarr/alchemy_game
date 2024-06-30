@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bunuukpo5c2h0"]
+[gd_scene load_steps=19 format=3 uid="uid://bunuukpo5c2h0"]
 
 [ext_resource type="Script" path="res://sprites/upgrade_screen.gd" id="1_2h7ex"]
 [ext_resource type="SpriteFrames" uid="uid://dcenyptmkxlew" path="res://sprites/bg.tres" id="1_2q1qy"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dqkmu1tquhwlg" path="res://sprites/button_down.png" id="15_pynll"]
 [ext_resource type="Script" path="res://sprites/shop_continue_button.gd" id="16_fw2qi"]
 [ext_resource type="AudioStream" uid="uid://dl2aiyynpdkw1" path="res://sfx/UI_Shop_Purchase_1.1.wav" id="17_1sgp2"]
+[ext_resource type="AudioStream" uid="uid://cl7p7lkwvec16" path="res://music/Alchemy Game - DayDream.wav" id="18_h5g5n"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_2h7ex")
@@ -204,6 +205,11 @@ z_index = 2
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_o3ima")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_h5g5n")
+volume_db = -5.622
+autoplay = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="gui_input" from="CenterContainer/UpgradeSlot" to="CenterContainer/UpgradeSlot" method="_on_gui_input"]
